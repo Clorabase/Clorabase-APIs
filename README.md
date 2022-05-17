@@ -16,7 +16,7 @@ Clorabase APIs are a standard set of http/json APIs which act as programmable bu
 
 ## Features / APIs
 
-- [Disposible chat room]()
+- [Disposible chat room](https://github.com/ErrorxCode/Clorabase-APIs/wiki/Chatroom-API-Reference)
 - More comming soon...
 
 
