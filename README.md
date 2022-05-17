@@ -1,8 +1,8 @@
-
 # Clorabase APIs
-![visitors](https://page-views.glitch.me/badge?page_id=ErrorxCode.Clorabase-APIs)
-
-![api-count](https://img.shields.io/badge/Total%20apis-2-blue)
+<p align="left">
+  <img src="https://page-views.glitch.me/badge?page_id=ErrorxCode.Clorabase-APIs">
+  <img src="https://img.shields.io/badge/Total%20apis-2-blue">
+</p>
 
 Clorabase APIs are a standard set of http/json APIs which act as programmable building blocks for rapid development of any product or services. Pick up and use one or more APIs as easily as importing a library and making a function call from a library.
 
@@ -17,7 +17,6 @@ Clorabase APIs are a standard set of http/json APIs which act as programmable bu
 ## Features / APIs
 
 - [Disposible chat room]()
-- [Online key-value store]()
 - More comming soon...
 
 
