@@ -1,7 +1,7 @@
 # Clorabase APIs
 <p align="left">
   <img src="https://page-views.glitch.me/badge?page_id=ErrorxCode.Clorabase-APIs">
-  <img src="https://img.shields.io/badge/Total%20apis-2-blue">
+  <img src="https://img.shields.io/badge/Total%20apis-3-blue">
 </p>
 
 Clorabase APIs are a standard set of http/json APIs which act as programmable building blocks for rapid development of any product or services. Pick up and use one or more APIs as easily as importing a library and making a function call from a library.
@@ -17,7 +17,8 @@ Clorabase APIs are a standard set of http/json APIs which act as programmable bu
 ## Features / APIs
 
 - [Disposible chat room](https://github.com/ErrorxCode/Clorabase-APIs/wiki/Chatroom-API-Reference)
-- More comming soon...
+- [Key-value datastore]()
+- [Clorastore database]()
 
 
 ## Authors
@@ -30,5 +31,5 @@ Clorabase APIs are a standard set of http/json APIs which act as programmable bu
 Contributions are always welcome!
 
 You can come up with great ideas & can impliment them as a new API.
-Your raising of the issue is too a large Contributing for our project.
+Even your raising of the issue is too large Contributing for our project.
 
