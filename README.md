@@ -17,7 +17,7 @@ Clorabase APIs are a standard set of http/json APIs which act as programmable bu
 ## Features / APIs
 
 - [Disposible chat room](https://github.com/ErrorxCode/Clorabase-APIs/wiki/Chatroom-API-Reference)
-- [Key-value datastore](https://clorabase-datastore.readme.io/)
+- [Key-value datastore](https://clorabase.stoplight.io/docs/clorabase-datastore)
 - [Clorastore database](https://clorabase.stoplight.io/docs/clorastore)
 
 
