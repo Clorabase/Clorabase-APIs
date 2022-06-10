@@ -14,8 +14,7 @@ import java.util.Map;
 
 @WebSocket()
 public class DatabaseHandler {
-    public static String DB_ID;
-    public static final Map<String, DatabaseInstance> users = new HashMap<>();
+    public static final Map<Session, DatabaseInstance> users = new HashMap<>();
 
     @OnWebSocketConnect
     public void onConnect(Session user) {
@@ -23,17 +22,19 @@ public class DatabaseHandler {
         var packageName = request.getHeader("Package");
         var id = request.getHeader("Client-ID");
         var secret = request.getHeader("Client-Secret");
-        DB_ID = request.getHeader("DB-ID");
+        var DB_ID = request.getHeader("DB-ID");
         var token = request.getHeader("Access-Token");
         if (packageName == null || id == null || secret == null || DB_ID == null || token == null) {
             user.close(500, "Credentials not provided");
         } else {
-            DatabaseInstance instance = new DatabaseInstance();
-            boolean isInitSuccessful = instance.init(id, secret, token, DB_ID, packageName);
-            if (isInitSuccessful) {
-                users.put(DB_ID, instance);
-            } else {
-                user.close(500, "Failed to initialize. Are you sure you have the correct credentials?");
+            if (!users.containsKey(user)){
+                DatabaseInstance instance = new DatabaseInstance();
+                boolean isInitSuccessful = instance.init(id, secret, token, DB_ID, packageName);
+                if (isInitSuccessful) {
+                    users.put(user, instance);
+                } else {
+                    user.close(500, "Failed to initialize. Are you sure you have the correct credentials?");
+                }
             }
         }
     }
@@ -47,7 +48,7 @@ public class DatabaseHandler {
     public void onMessage(Session user, String message) throws IOException {
         JSONObject json = new JSONObject(message);
         String type = json.getString("method");
-        DatabaseInstance instance = users.get(DB_ID);
+        DatabaseInstance instance = users.get(user);
         String result = "Invalid request";
         switch (type) {
             case "getData" -> result = instance.getData(json.optString("node"));
