@@ -1,1 +1,1 @@
-web java $JAVA_OPTS -jar Clorabase-APIs.jar $JAR_OPTS
+web java $JAVA_OPTS /Clorabase-APIs/src/main/java/com/clorabase/api/Main.java
