@@ -15,7 +15,7 @@ public class Main {
         String port = System.getenv("PORT");
         Spark.port(port == null ? 3000 : Integer.parseInt(port));
         configureApis();
-        Spark.before("/", (request, response) -> response.type("application/json"));
+   //     Spark.before("/", (request, response) -> response.type("application/json"));
         Spark.redirect.any("/", "https://clorabase.tk/apis");
 
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
