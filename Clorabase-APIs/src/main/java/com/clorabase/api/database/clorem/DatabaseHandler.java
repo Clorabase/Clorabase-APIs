@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-@WebSocket()
+@WebSocket(maxTextMessageSize = 1024 * 1024 * 1024)
 public class DatabaseHandler {
     public static final Map<Session, DatabaseInstance> users = new HashMap<>();
 
