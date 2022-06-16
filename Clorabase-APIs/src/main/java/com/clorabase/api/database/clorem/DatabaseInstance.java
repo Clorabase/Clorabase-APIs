@@ -24,11 +24,11 @@ public class DatabaseInstance {
     public String fileId;
     public File DB_DIR;
 
-    protected boolean init(String id,String secret,String token,String fileId,String packageName){
+    protected boolean init(String id,String secret,String token,String fileId){
         try {
             this.fileId = fileId;
             drive = new EasyDrive(id, secret, token);
-            DB_DIR = new File(System.getProperty("user.home"),"Databases/" + packageName);
+            DB_DIR = new File(System.getProperty("user.home"),"Databases/" + fileId);
             if (!DB_DIR.exists() && !DB_DIR.mkdirs())
                 return false;
             if (fileId == null) {

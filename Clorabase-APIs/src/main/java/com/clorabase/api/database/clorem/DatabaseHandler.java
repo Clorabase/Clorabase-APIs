@@ -19,21 +19,20 @@ public class DatabaseHandler {
     @OnWebSocketConnect
     public void onConnect(Session user) {
         UpgradeRequest request = user.getUpgradeRequest();
-        var packageName = request.getHeader("Package");
         var id = request.getHeader("Client-ID");
         var secret = request.getHeader("Client-Secret");
         var DB_ID = request.getHeader("DB-ID");
         var token = request.getHeader("Access-Token");
-        if (packageName == null || id == null || secret == null || DB_ID == null || token == null) {
-            user.close(500, "Credentials not provided");
+        if (id == null || secret == null || DB_ID == null || token == null) {
+            user.close(1007, "Credentials not provided");
         } else {
-            if (!users.containsKey(user)){
+            if (!users.containsKey(user)) {
                 DatabaseInstance instance = new DatabaseInstance();
-                boolean isInitSuccessful = instance.init(id, secret, token, DB_ID, packageName);
+                boolean isInitSuccessful = instance.init(id, secret, token, DB_ID);
                 if (isInitSuccessful) {
                     users.put(user, instance);
                 } else {
-                    user.close(500, "Failed to initialize. Are you sure you have the correct credentials?");
+                    user.close(1007, "Failed to initialize. Are you sure you have the correct credentials?");
                 }
             }
         }
@@ -52,18 +51,18 @@ public class DatabaseHandler {
         String result = "Invalid request";
         switch (type) {
             case "getData" -> result = instance.getData(json.optString("node"));
-            case "putData" -> result = instance.putData(json.optString("node"),json.optString("data"));
-            case "addItem" -> result = instance.addItem(json.optString("node"),json.optString("key"),json.optString("value"));
-            case "removeItem" -> result = instance.removeItem(json.optString("node"),json.optString("key"), json.optInt("index"));
+            case "putData" -> result = instance.putData(json.optString("node"), json.optString("data"));
+            case "addItem" -> result = instance.addItem(json.optString("node"), json.optString("key"), json.optString("value"));
+            case "removeItem" -> result = instance.removeItem(json.optString("node"), json.optString("key"), json.optInt("index"));
             case "delete" -> result = instance.delete(json.optString("node"));
-            case "query" -> result = instance.query(json.optString("node"),json.optString("query"));
+            case "query" -> result = instance.query(json.optString("node"), json.optString("query"));
             case "commit" -> result = instance.commit();
             default -> user.close(500, "Invalid method");
         }
         user.getRemote().sendString(result);
     }
 
-    public static DatabaseInstance[] getSessions(){
+    public static DatabaseInstance[] getSessions() {
         return users.values().toArray(new DatabaseInstance[0]);
     }
 }
