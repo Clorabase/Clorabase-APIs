@@ -14,7 +14,7 @@ import java.util.Map;
 
 @WebSocket(maxTextMessageSize = 1024 * 1024 * 1024)
 public class DatabaseHandler {
-    public static final Map<Session, DatabaseInstance> users = new HashMap<>();
+    public static final Map<String, DatabaseInstance> users = new HashMap<>();
 
     @OnWebSocketConnect
     public void onConnect(Session user) {
@@ -26,11 +26,11 @@ public class DatabaseHandler {
         if (id == null || secret == null || DB_ID == null || token == null) {
             user.close(1007, "Credentials not provided");
         } else {
-            if (!users.containsKey(user)) {
+            if (!users.containsKey(DB_ID)) {
                 DatabaseInstance instance = new DatabaseInstance();
                 boolean isInitSuccessful = instance.init(id, secret, token, DB_ID);
                 if (isInitSuccessful) {
-                    users.put(user, instance);
+                    users.put(DB_ID, instance);
                 } else {
                     user.close(1007, "Failed to initialize. Are you sure you have the correct credentials?");
                 }
@@ -40,7 +40,7 @@ public class DatabaseHandler {
 
     @OnWebSocketClose
     public void onClose(Session user, int statusCode, String reason) throws IOException {
-        System.out.println("Closing connection from " + user.getRemoteAddress().getAddress().getHostAddress() + "with reason " + reason);
+        System.out.println("Closing connection from " + user.getRemoteAddress().getAddress().getHostAddress() + " with reason " + reason);
     }
 
     @OnWebSocketMessage
